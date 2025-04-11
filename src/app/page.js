@@ -21,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api");
+        const res = await fetch("https://sazkala.liara.run/api");
         const data = await res.json();
         setProducts(data);
       } catch (error) {
@@ -48,7 +48,7 @@ export default function Home() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const res = await fetch("https://sazkala.liara.run/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export default function Home() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch("https://sazkala.liara.run/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,15 +125,18 @@ export default function Home() {
 
     // درخواست به سرور برای دریافت لینک پرداخت
     try {
-      const res = await fetch("http://localhost:5000/api/payment/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: activeUser._id,
-          items,
-          totalPrice,
-        }),
-      });
+      const res = await fetch(
+        "https://sazkala.liara.run/api/payment/checkout",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: activeUser._id,
+            items,
+            totalPrice,
+          }),
+        }
+      );
 
       if (res.ok) {
         const data = await res.json();
